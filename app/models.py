@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from datetime import datetime
 from secrets import token_urlsafe
 
-from app import db, login
+from app import db, ma, login
 
 @login.user_loader
 def load_user(user_id):
