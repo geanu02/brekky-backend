@@ -2,7 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 from secrets import token_urlsafe
-
+from sqlalchemy.dialects.postgresql import JSON
 from app import db, ma, login
 
 @login.user_loader
@@ -47,8 +47,8 @@ class UserRecipe(db.Model):
     recipe_id = db.Column(db.Integer)
     recipe_title = db.Column(db.String(150))
     recipe_thumb = db.Column(db.String(250))
-    recipe_api_content = db.Column(db.PickleType())
-    recipe_user_content = db.Column(db.PickleType())
+    recipe_api_content = db.Column(JSON)
+    recipe_user_content = db.Column(JSON)   
     recipe_api_url = db.Column(db.String(250))
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
