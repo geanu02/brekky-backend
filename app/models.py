@@ -38,6 +38,10 @@ class User(UserMixin, db.Model):
     def get_id(self):
         return str(self.user_id)
     
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ('user_id', 'username', 'email', 'first_name', 'last_name', 'password', 'token')
+    
 class UserRecipe(db.Model):
     user_recipe_id = db.Column(db.Integer, primary_key=True)
     recipe_id = db.Column(db.Integer)
@@ -54,3 +58,14 @@ class UserRecipe(db.Model):
 
     def __repr__(self):
         return f"Registered UserRecipe: {self.user_recipe_id} ({self.recipe_title})>"
+    
+class UserRecipeSchema(ma.Schema):
+    class Meta:
+        fields = ( 'user_recipe_id',
+                    'recipe_id',
+                    'recipe_title',
+                    'recipe_thumb',
+                    'recipe_api_content',
+                    'recipe_user_content',
+                    'recipe_api_url'
+                )
