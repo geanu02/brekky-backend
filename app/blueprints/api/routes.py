@@ -39,9 +39,9 @@ def add_recipe(user):
     })
 
 @bp.route('/get/<user_recipe_id>', methods=["GET"])
-@token_required
-def get_recipe(user, user_recipe_id):
-    content = request.json
+# @token_required
+# def get_recipe(user, user_recipe_id):
+def get_recipe(user_recipe_id):
     recipe = UserRecipe.query.filter_by(user_recipe_id=user_recipe_id).first()
     if recipe:
         result = user_recipe_schema.dump(recipe)
