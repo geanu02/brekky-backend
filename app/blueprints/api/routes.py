@@ -12,7 +12,7 @@ user_recipe_schema = UserRecipeSchema()
 user_recipes_schema = UserRecipeSchema(many=True)
 
 # Add UserRecipe
-@bp.post('/add', methods=["POST"])
+@bp.route('/add', methods=["POST"])
 @token_required
 def add_recipe(user):
     content = request.json
