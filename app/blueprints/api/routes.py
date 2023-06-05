@@ -23,8 +23,8 @@ def add_recipe(user):
             recipe_id = content['recipe_id'],
             recipe_title = content['recipe_title'],
             recipe_thumb = content['recipe_thumb'],
-            recipe_api_content = json.dumps(content['recipe_api_content']),
-            recipe_user_content = json.dumps(content['recipe_user_content']),
+            recipe_api_content = content['recipe_api_content'],
+            recipe_user_content = content['recipe_user_content'],
             recipe_api_url = content['recipe_api_url']
         )
         rec.commit()
