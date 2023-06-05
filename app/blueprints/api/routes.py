@@ -23,8 +23,8 @@ def add_recipe(user):
             recipe_id = content['recipe_id'],
             recipe_title = content['recipe_title'],
             recipe_thumb = content['recipe_thumb'],
-            recipe_api_content = content['recipe_api_content'],
-            recipe_user_content = content['recipe_user_content'],
+            recipe_api_content = json.dumps(content['recipe_api_content']),
+            recipe_user_content = json.dumps(content['recipe_user_content']),
             recipe_api_url = content['recipe_api_url']
         )
         rec.commit()
@@ -38,3 +38,15 @@ def add_recipe(user):
         "success": False
     })
 
+@bp.route('/get/<user_recipe_id>', methods=["GET"])
+@token_required
+def get_recipe(user, user_recipe_id):
+    content = request.json
+    recipe = UserRecipe.query.filter_by(user_recipe_id=user_recipe_id).first()
+    if recipe:
+        result = user_recipe_schema.dump(recipe)
+        return jsonify(result)
+    return jsonify({
+        "message": f"User Recipe ID: {user_recipe_id} does not exist.",
+        "success": False
+    })
