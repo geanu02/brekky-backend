@@ -15,6 +15,7 @@ def verify_user():
         return jsonify([{
             "message": f"{user.username} successfully verified!",
             "success": True,
+            "first_name": user.first_name,
             "token": user.token
         }])
     return jsonify({
@@ -52,5 +53,6 @@ def register_user():
     return jsonify([{
         "message": f"{user.username} successfully registered!",
         "success": True,
+        "first_name": user.first_name,
         "token": user.token
     }])
