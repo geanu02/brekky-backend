@@ -29,7 +29,9 @@ def add_recipe(user):
         )
         rec.commit()
         return jsonify({
-            "message": f"Recipe {rec.recipe_id} successfully posted!",
+            "message": f"User Recipe {rec.user_recipe_id} successfully added!",
+            "userRecipeId": rec.user_recipe_id,
+            "recipeId": rec.recipe_id,
             "success": True
         })
     else:
