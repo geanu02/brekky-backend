@@ -53,3 +53,17 @@ def get_recipe(user_recipe_id):
         "message": f"User Recipe ID: {user_recipe_id} does not exist.",
         "success": False
     })
+
+@bp.route('/recipe/<user_recipe_id>', methods=["POST", "PUT"])
+@token_required
+def update_recipe(user, user_recipe_id):
+    recipe = UserRecipe.query.filter_by(user_recipe_id=user_recipe_id).first()
+    if recipe:
+        recipe.recipe_user_content = request.json
+        recipe.commit()
+        result = user_recipe_schema.dump(recipe)
+        return jsonify(result)
+    return jsonify({
+        "message": f"User Recipe ID: {user_recipe_id} does not exist.",
+        "success": False
+    })
