@@ -70,7 +70,7 @@ def update_recipe(user, user_recipe_id):
 
 @bp.route('/recipe/<user_recipe_id>', methods=["DELETE"])
 @token_required
-def update_recipe(user, user_recipe_id):
+def delete_recipe(user, user_recipe_id):
     recipe = UserRecipe.query.filter_by(user_recipe_id=user_recipe_id).first()
     if recipe:
         db.session.delete(recipe)
