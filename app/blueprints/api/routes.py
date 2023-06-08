@@ -31,6 +31,7 @@ def add_recipe(user):
         return jsonify({
             "message": f"User Recipe {rec.user_recipe_id} successfully added!",
             "userRecipeId": rec.user_recipe_id,
+            "userRecipeTitle": rec.recipe_title,
             "recipeId": rec.recipe_id,
             "success": True
         })
