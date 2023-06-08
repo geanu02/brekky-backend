@@ -61,9 +61,6 @@ def get_all_user_recipes(username):
     chosenUser = User.query.filter_by(username=username).first()
     if chosenUser:
         result = user_recipes_schema.dump(chosenUser.user_recipe)
-        countRecipes = len(result)
-        result.append({"message": f"{username} has {countRecipes} recipes."})
-        result.append({"success": True})
         return jsonify(result)
     return jsonify({
         "message": f"{username} does not have recipes.",
