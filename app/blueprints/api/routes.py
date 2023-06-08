@@ -55,19 +55,19 @@ def get_recipe(user_recipe_id):
     })
 
 # Get All User Recipes by User ID
-@bp.route('/getall/<user_id>', methods=["GET"])
+@bp.route('/getall/<username>', methods=["GET"])
 @token_required
-def get_all_user_recipes(user, user_id):
-    chosenUser = User.query.filter_by(user_id=user_id).first()
+def get_all_user_recipes(user, username):
+    chosenUser = User.query.filter_by(username=username).first()
     if chosenUser:
         result = user_recipes_schema.dump(chosenUser.user_recipe)
         result.update({
-            "message": f"User ID: {user_id} has recipes.",
+            "message": f"{username} has recipes.",
             "success": True
         })
         return jsonify(result)
     return jsonify({
-        "message": f"User ID: {user_id} does not have recipes.",
+        "message": f"{username} does not have recipes.",
         "success": False
     })
 
