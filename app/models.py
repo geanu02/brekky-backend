@@ -48,8 +48,7 @@ class UserRecipe(db.Model):
     recipe_title = db.Column(db.String(150))
     recipe_thumb = db.Column(db.String(250))
     recipe_api_content = db.Column(JSON)
-    recipe_user_content = db.Column(JSON)   
-    recipe_api_url = db.Column(db.String(250))
+    recipe_user_content = db.Column(JSON)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
     def commit(self):
@@ -66,6 +65,5 @@ class UserRecipeSchema(ma.Schema):
                     'recipe_title',
                     'recipe_thumb',
                     'recipe_api_content',
-                    'recipe_user_content',
-                    'recipe_api_url'
+                    'recipe_user_content'
                 )
