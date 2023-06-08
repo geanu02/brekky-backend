@@ -1,5 +1,4 @@
 from flask import request, jsonify
-import json
 from . import bp
 from app import db
 from app.models import User, UserRecipe, UserSchema, UserRecipeSchema
@@ -62,7 +61,24 @@ def update_recipe(user, user_recipe_id):
         recipe.recipe_user_content = request.json
         recipe.commit()
         result = user_recipe_schema.dump(recipe)
+        result.update({"message": f"User Recipe ID: {user_recipe_id} has been updated successfully."})
         return jsonify(result)
+    return jsonify({
+        "message": f"User Recipe ID: {user_recipe_id} does not exist.",
+        "success": False
+    })
+
+@bp.route('/recipe/<user_recipe_id>', methods=["DELETE"])
+@token_required
+def update_recipe(user, user_recipe_id):
+    recipe = UserRecipe.query.filter_by(user_recipe_id=user_recipe_id).first()
+    if recipe:
+        db.session.delete(recipe)
+        recipe.commit()
+        return jsonify({
+            "message": f"User Recipe ID: {user_recipe_id} has been deleted.",
+            "success": True
+        })
     return jsonify({
         "message": f"User Recipe ID: {user_recipe_id} does not exist.",
         "success": False
