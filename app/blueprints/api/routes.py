@@ -56,8 +56,9 @@ def get_recipe(user_recipe_id):
 
 # Get All User Recipes by User ID
 @bp.route('/getall/<username>', methods=["GET"])
-@token_required
-def get_all_user_recipes(user, username):
+# @token_required
+#def get_all_user_recipes(user, username):
+def get_all_user_recipes(username):
     chosenUser = User.query.filter_by(username=username).first()
     if chosenUser:
         result = user_recipes_schema.dump(chosenUser.user_recipe)
