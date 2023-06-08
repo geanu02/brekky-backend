@@ -40,6 +40,7 @@ def add_recipe(user):
         "success": False
     })
 
+# Get User Recipe by User Recipe ID 
 @bp.route('/get/<user_recipe_id>', methods=["GET"])
 # @token_required
 # def get_recipe(user, user_recipe_id):
@@ -53,6 +54,24 @@ def get_recipe(user_recipe_id):
         "success": False
     })
 
+# Get All User Recipes by User ID
+@bp.route('/getall/<user_id>', methods=["GET"])
+@token_required
+def get_all_user_recipes(user, user_id):
+    chosenUser = User.query.filter_by(user_id=user_id).first()
+    if chosenUser:
+        result = user_recipes_schema.dump(chosenUser.user_recipe)
+        result.update({
+            "message": f"User ID: {user_id} has recipes.",
+            "success": True
+        })
+        return jsonify(result)
+    return jsonify({
+        "message": f"User ID: {user_id} does not have recipes.",
+        "success": False
+    })
+
+# Update User Recipe by User Recipe ID
 @bp.route('/recipe/<user_recipe_id>', methods=["POST", "PUT"])
 @token_required
 def update_recipe(user, user_recipe_id):
@@ -68,6 +87,7 @@ def update_recipe(user, user_recipe_id):
         "success": False
     })
 
+# Delete User Recipe by User Recipe ID
 @bp.route('/recipe/<user_recipe_id>', methods=["DELETE"])
 @token_required
 def delete_recipe(user, user_recipe_id):
