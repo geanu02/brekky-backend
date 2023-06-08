@@ -90,7 +90,7 @@ def delete_recipe(user, user_recipe_id):
     recipe = UserRecipe.query.filter_by(user_recipe_id=user_recipe_id).first()
     if recipe:
         db.session.delete(recipe)
-        recipe.commit()
+        db.session.commit()
         return jsonify({
             "message": f"User Recipe ID: {user_recipe_id} has been deleted.",
             "success": True
