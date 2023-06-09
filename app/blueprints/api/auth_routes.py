@@ -65,12 +65,10 @@ def get_user(user):
     user = User.query.filter_by(username=username).first()
     if user:
         return jsonify([{
-            "message": f"{user.username} successfully verified!",
-            "success": True,
+            "username": username,
             "email": user.email,
             "first_name": user.first_name,
-            "last_name": user.last_name,
-            "token": user.token
+            "last_name": user.last_name
         }])
     return jsonify({
         "message": "User info not found.",
