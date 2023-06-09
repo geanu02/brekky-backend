@@ -2,9 +2,9 @@ from flask import request, jsonify
 
 from . import bp
 from app.models import User
+from app.blueprints.api.helpers import token_required
 
 # Verify User
-
 @bp.route('/verify-user', methods=["POST"])
 def verify_user():
     content = request.json
@@ -24,7 +24,6 @@ def verify_user():
     })
 
 # Register User
-
 @bp.route('/register-user', methods=["POST"])
 def register_user():
     content = request.json
@@ -56,3 +55,46 @@ def register_user():
         "first_name": user.first_name,
         "token": user.token
     }])
+
+# Get User Information
+@bp.route('/get-user', methods=["POST"])
+@token_required
+def get_user():
+    content = request.json
+    username = content['username']
+    user = User.query.filter_by(username=username).first()
+    if user:
+        return jsonify([{
+            "message": f"{user.username} successfully verified!",
+            "success": True,
+            "email": user.email,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "token": user.token
+        }])
+    return jsonify({
+        "message": "User info not found.",
+        "success": False
+    })
+
+@bp.route('/update-names', methods=["PUT"])
+@token_required
+def update_names(user):
+    updateUser = User.query.filter_by(token=user.token).first()
+    content = request.json
+    first_name = content['first_name']
+    last_name = content['last_name']
+    if updateUser:
+        updateUser.first_name = first_name
+        updateUser.last_name = last_name
+        updateUser.commit()
+        return jsonify([{
+            "message": f"{user.username} successfully updated!",
+            "success": True,
+            "first_name": user.first_name,
+            "token": user.token
+        }])
+    return jsonify([{
+            "message": f"Update not successful.",
+            "success": False
+        }])
