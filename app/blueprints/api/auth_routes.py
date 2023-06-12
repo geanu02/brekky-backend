@@ -90,6 +90,7 @@ def update_names(user):
             "message": f"{user.username} successfully updated!",
             "success": True,
             "first_name": user.first_name,
+            "last_name": user.last_name,
             "token": user.token
         }])
     return jsonify([{
