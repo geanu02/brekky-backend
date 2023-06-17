@@ -83,6 +83,21 @@ def update_names(user):
     content = request.json
     first_name = content['first_name']
     last_name = content['last_name']
+
+    # Add Email and Username check for PUT method
+    
+    # user_check = User.query.filter_by(username=username).first()
+    # if user_check:
+    #     return jsonify([{
+    #         "message": "Username is taken. Try again.",
+    #         "success": False
+    #     }])
+    # email_check = User.query.filter_by(email=email).first()
+    # if email_check:
+    #     return jsonify([{
+    #         "message": "Email is already registered. Try again.",
+    #         "success": False
+    #     }])
     if updateUser:
         updateUser.first_name = first_name
         updateUser.last_name = last_name
