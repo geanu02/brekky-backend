@@ -53,6 +53,7 @@ def register_user():
         "message": f"{user.username} successfully registered!",
         "success": True,
         "first_name": user.first_name,
+        "username": user.username,
         "token": user.token
     }])
 
