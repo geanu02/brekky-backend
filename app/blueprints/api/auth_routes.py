@@ -58,11 +58,9 @@ def register_user():
     }])
 
 # Get User Information
-@bp.route('/get-user', methods=["POST"])
+@bp.route('/get-user/<username>', methods=["GET"])
 @token_required
-def get_user(user):
-    content = request.json
-    username = content['username']
+def get_user(user, username):
     user = User.query.filter_by(username=username).first()
     if user:
         return jsonify([{
