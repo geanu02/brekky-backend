@@ -76,9 +76,9 @@ def get_user(user):
         "success": False
     })
 
-@bp.route('/update-names', methods=["PUT"])
+@bp.route('/update-account', methods=["PUT"])
 @token_required
-def update_names(user):
+def update_account(user):
     updateUser = User.query.filter_by(token=user.token).first()
     content = request.json
     first_name = content['first_name']
