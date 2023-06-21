@@ -85,15 +85,13 @@ def update_account(user):
     username = content['username']
     email = content['email']
     user_check = User.query.filter_by(username=username).first()
-    # Add an IF to check if the username and email are being 
-    # updated from the same user account. Disregard the PUT if it is. 
-    if user_check:
+    if updateUser.username != username and not user_check:
         return jsonify([{
             "message": "Username is taken. Try again.",
             "success": False
         }])
     email_check = User.query.filter_by(email=email).first()
-    if email_check:
+    if updateUser.email != email and not email_check:
         return jsonify([{
             "message": "Email is already registered. Try again.",
             "success": False
