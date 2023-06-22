@@ -95,6 +95,9 @@ def update_account(user):
         if updateUser.email != email and not email_check:
             return jsonify([{
                 "message": "Email is already registered. Try again.",
+                "email_check": f"{email_check.email}",
+                "updateUser": f"{updateUser.email}",
+                "content[email]": f"{email}",
                 "success": False
             }])
         updateUser.first_name = first_name
@@ -111,6 +114,6 @@ def update_account(user):
             "email": updateUser.email
         }])
     return jsonify([{
-            "message": f"Update not successful.",
+            "message": "Update not successful. Try loggin in again.",
             "success": False
         }])
