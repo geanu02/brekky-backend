@@ -85,8 +85,9 @@ def update_account(user):
     username = content['username']
     email = content['email']
     if updateUser:
-        user_check = User.query.filter_by(username=username).first()
-        if updateUser.username != username and not user_check:
+
+        user_check = User.query.filter(User.token != user.token).all()
+        if updateUser.username != username and username not in user_check:
             return jsonify([{
                 "message": "Username is taken. Try again.",
                 "success": False
