@@ -84,19 +84,19 @@ def update_account(user):
     last_name = content['last_name']
     username = content['username']
     email = content['email']
-    user_check = User.query.filter_by(username=username).first()
-    if updateUser.username != username and not user_check:
-        return jsonify([{
-            "message": "Username is taken. Try again.",
-            "success": False
-        }])
-    email_check = User.query.filter_by(email=email).first()
-    if updateUser.email != email and not email_check:
-        return jsonify([{
-            "message": "Email is already registered. Try again.",
-            "success": False
-        }])
     if updateUser:
+        user_check = User.query.filter_by(username=username).first()
+        if updateUser.username != username and not user_check:
+            return jsonify([{
+                "message": "Username is taken. Try again.",
+                "success": False
+            }])
+        email_check = User.query.filter_by(email=email).first()
+        if updateUser.email != email and not email_check:
+            return jsonify([{
+                "message": "Email is already registered. Try again.",
+                "success": False
+            }])
         updateUser.first_name = first_name
         updateUser.last_name = last_name
         updateUser.email = email
