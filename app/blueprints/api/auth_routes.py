@@ -97,7 +97,7 @@ def update_account(user):
                 "message": "Email is already registered. Try again.",
                 "email_check": f"{email_check.email}",
                 "updateUser": f"{updateUser.email}",
-                "content[email]": f"{email}",
+                "content_email": f"{email}",
                 "success": False
             }])
         updateUser.first_name = first_name
