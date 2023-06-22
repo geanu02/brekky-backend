@@ -93,11 +93,11 @@ def update_account(user):
             }])
         email_check = User.query.filter_by(email=email).first()
         if updateUser.email != email and not email_check:
+            print("emailcheck", f"{email_check.email}")
+            print("updateUser", f"{updateUser.email}")
+            print("content_email", f"{email}")
             return jsonify([{
                 "message": "Email is already registered. Try again.",
-                "email_check": f"{email_check.email}",
-                "updateUser": f"{updateUser.email}",
-                "content_email": f"{email}",
                 "success": False
             }])
         updateUser.first_name = first_name
