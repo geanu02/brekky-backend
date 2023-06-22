@@ -19,9 +19,6 @@ class User(UserMixin, db.Model):
     token = db.Column(db.String(250), unique=True)
     user_recipe = db.relationship('UserRecipe', backref='recipe', lazy=True)
 
-    def __repr__(self):
-        return f"Registered Account: {self.email}"
-
     def commit(self):
         db.session.add(self)
         db.session.commit()
