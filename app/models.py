@@ -63,3 +63,9 @@ class UserRecipeSchema(ma.Schema):
                     'recipe_api_content',
                     'recipe_user_content'
                 )
+        
+# Instantiate Schemas
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
+user_recipe_schema = UserRecipeSchema()
+user_recipes_schema = UserRecipeSchema(many=True)

@@ -1,14 +1,8 @@
 from flask import request, jsonify
 from . import bp
 from app import db
-from app.models import User, UserRecipe, UserSchema, UserRecipeSchema
+from app.models import User, UserRecipe, UserSchema, UserRecipeSchema, user_schema, users_schema, user_recipe_schema, user_recipes_schema
 from app.blueprints.api.helpers import token_required
-
-# Instantiate Schemas
-user_schema = UserSchema()
-users_schema = UserSchema(many=True)
-user_recipe_schema = UserRecipeSchema()
-user_recipes_schema = UserRecipeSchema(many=True)
 
 # Add UserRecipe
 @bp.route('/add', methods=["POST"])
