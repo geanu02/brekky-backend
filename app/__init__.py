@@ -14,6 +14,8 @@ ma = Marshmallow(app)
 login = LoginManager(app)
 CORS(app)
 
+# CORS update
+
 login.login_view = 'auth.signin'
 login.login_message = "Login required"
 login.login_message_category = "warning"
