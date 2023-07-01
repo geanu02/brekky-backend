@@ -23,4 +23,4 @@ login.login_message_category = "warning"
 from app.blueprints.api import bp as api_bp
 app.register_blueprint(api_bp)
 
-from app import models
+from app import models 
