@@ -4,6 +4,8 @@ from secrets import token_urlsafe
 from sqlalchemy.dialects.postgresql import JSON
 from app import db, ma, login
 
+#CORS
+
 @login.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
