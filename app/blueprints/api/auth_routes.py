@@ -19,10 +19,17 @@ def verify_user():
             "first_name": user.first_name,
             "token": user.token
         }])
-    return jsonify({
-        "message": "User info not found.",
+    elif user and not user.check_password(password):
+        return jsonify([{
+        "message": "Password incorrect.",
+        "error": "password",
         "success": False
-    })
+    }])
+    return jsonify([{
+        "message": "User info not found.",
+        "error": "user",
+        "success": False
+    }])
 
 # Register User
 @bp.route('/register-user', methods=["POST"])
